@@ -174,6 +174,17 @@ section { padding-block: clamp(3.5rem, 8vw, 6.5rem) 0; scroll-margin-top: 4.5rem
   .services li { grid-template-columns: 13rem 1fr; align-items: baseline; }
 }
 
+/* intro and about section */
+.intro-hero { display: block; padding-bottom: clamp(2rem, 5vw, 4rem); }
+.intro-hero h1 { max-width: 12ch; }
+.intro-hero h1 .outline { display: inline; }
+.about-section { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; padding-block: 2rem clamp(3.5rem, 8vw, 6.5rem); }
+.about-photo { width: 100%; max-width: 22rem; justify-self: center; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); }
+.about-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.about-copy h2 { font: 800 clamp(2.2rem, 6vw, 4rem)/.98 var(--display); font-variation-settings: "wdth" 60; text-transform: uppercase; margin-block: .8rem 1rem; }
+.about-copy p.big { font-size: clamp(1.05rem, 2.2vw, 1.25rem); line-height: 1.65; max-width: 38rem; color: var(--muted); }
+@media (min-width: 760px) { .about-section { grid-template-columns: .75fr 1.25fr; gap: clamp(2rem, 7vw, 6rem); } .about-photo { justify-self: start; } }
+
 /* brief */
 .brief { display: grid; gap: 2rem; margin-top: 2rem; }
 .brief > * { min-width: 0; }
@@ -220,62 +231,6 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
-
-/* Motion design: editorial entrance, floating artwork, and scroll reveals */
-@keyframes riseIn {
-  from { opacity: 0; transform: translateY(28px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes posterInLeft {
-  from { opacity: 0; transform: translate(-28px, 18px) rotate(-12deg) scale(.96); }
-  to { opacity: 1; transform: translate(0, 0) rotate(-7deg) scale(1); }
-}
-@keyframes posterInRight {
-  from { opacity: 0; transform: translate(28px, -12px) rotate(10deg) scale(.96); }
-  to { opacity: 1; transform: translate(0, 0) rotate(5deg) scale(1); }
-}
-@keyframes posterInCenter {
-  from { opacity: 0; transform: translateY(34px) rotate(3deg) scale(.94); }
-  to { opacity: 1; transform: translateY(0) rotate(-1.5deg) scale(1); }
-}
-@keyframes softFloat {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -8px; }
-}
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-20%); }
-}
-.hero > div:first-child > * {
-  animation: riseIn .75s cubic-bezier(.2,.7,.2,1) both;
-}
-.hero > div:first-child > *:nth-child(1) { animation-delay: .05s; }
-.hero > div:first-child > *:nth-child(2) { animation-delay: .13s; }
-.hero > div:first-child > *:nth-child(3) { animation-delay: .22s; }
-.hero > div:first-child > *:nth-child(4) { animation-delay: .31s; }
-.hero > div:first-child > *:nth-child(5) { animation-delay: .4s; }
-.stack .p1 { animation: posterInLeft .85s .18s cubic-bezier(.2,.7,.2,1) both; }
-.stack .p2 { animation: posterInRight .85s .3s cubic-bezier(.2,.7,.2,1) both; }
-.stack .p3 { animation: posterInCenter .9s .42s cubic-bezier(.2,.7,.2,1) both; }
-.stack:hover .p1 { transform: rotate(-10deg) translateX(-2%); }
-.stack:hover .p2 { transform: rotate(8deg) translateX(2%); }
-.stack:hover .p3 { transform: rotate(0deg) translateY(-2%); }
-.brands li { transition: color .25s, transform .25s; }
-.brands li:hover { color: var(--accent); transform: translateY(-3px); }
-.card { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
-.card.is-visible { opacity: 1; transform: translateY(0); }
-.card .shot img { transition: transform .65s cubic-bezier(.2,.7,.2,1), filter .4s; }
-.card > button:hover .shot img { transform: scale(1.045); filter: saturate(1.08); }
-section .head, .about > div, .services li { transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1); }
-.reveal-ready { opacity: 0; transform: translateY(20px); }
-.reveal-ready.is-visible { opacity: 1; transform: translateY(0); }
-.btn { transition: transform .25s, background-color .2s, color .2s, border-color .2s; }
-.btn:hover { transform: translateY(-2px); }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-  .card, .reveal-ready { opacity: 1; transform: none; }
-}
-
 </style>
 
 <style>html{color-scheme:light}body{margin:0}</style>
@@ -286,7 +241,6 @@ section .head, .about > div, .services li { transition: opacity .65s ease, trans
     <a class="mark" href="#top" aria-label="Yashmika Dalmia, back to top">Y<span>/</span>D</a>
     <nav class="nav" aria-label="Sections">
       <a href="#work">Work</a>
-      <a href="#about">About</a>
       <button class="theme" id="themeBtn" type="button" aria-label="Switch between light and dark">
         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>
       </button>
@@ -296,38 +250,28 @@ section .head, .about > div, .services li { transition: opacity .65s ease, trans
 
 <main id="top">
   <div class="wrap">
-    <div class="hero">
+    <div class="hero intro-hero">
       <div>
-        <p class="mono">Graphic designer · Social media creatives</p>
-        <h1>Yashmika <span class="outline">Dalmia</span></h1>
-        <p class="lede">Posts that stop the scroll for brands that sell homes, food and building materials.</p>
+        <p class="mono">Welcome to my portfolio</p>
+        <h1>Hi, I’m <span class="outline">Yashmika Dalmia</span></h1>
+        <p class="lede">I’m a graphic designer who enjoys creating thoughtful, eye-catching visuals for brands and social media.</p>
         <div class="cta">
-          <a class="btn solid" href="#work">See the work</a>
+          <a class="btn solid" href="#about">About me</a>
+          <a class="btn" href="#work">See my work</a>
         </div>
-        <p class="spec mono"><span>12 posts</span><span>7 brands</span><span>4:5 · 1080 × 1350 px</span></p>
-      </div>
-      <div class="stack">
-        <i class="cm tl"></i><i class="cm tr"></i><i class="cm bl"></i><i class="cm br"></i>
-        <figure class="p1"><img src="img/sandeepg-kargil.jpg" alt="Kargil Vijay Diwas post with soldiers raising the Indian flag" width="864" height="1080"></figure>
-        <figure class="p2"><img src="img/dessi-weekend.jpg" alt="Dessi Chilli weekend checklist post with a sizzling chocolate dessert" width="864" height="1080"></figure>
-        <figure class="p3"><img src="img/singalila-gate.jpg" alt="Singalila Estate gated entrance with plot sizes and road widths" width="864" height="1080"></figure>
       </div>
     </div>
-  </div>
 
-  <div class="brands">
-    <div class="wrap">
-      <p class="mono">Designed for</p>
-      <ul>
-        <li>Sandeep G Real Estate</li>
-        <li>Barsana Garden</li>
-        <li>Unity Group · Star Green</li>
-        <li>Dessi Chilli</li>
-        <li>F9 Planet Studio</li>
-        <li>Buildware Infrasteel</li>
-        <li>MBK Ply</li>
-      </ul>
-    </div>
+    <section id="about" class="about-section">
+      <div class="about-photo">
+        <img src="img/yashmika-portrait.jpeg" alt="Portrait of Yashmika Dalmia, graphic designer" width="688" height="1024">
+      </div>
+      <div class="about-copy">
+        <p class="mono">A little about me</p>
+        <h2>I’m a graphic designer.</h2>
+        <p class="big">I love turning ideas into clear, creative designs. From social media posts to brand visuals, I focus on combining colour, typography and layout to make every design feel engaging and memorable.</p>
+      </div>
+    </section>
   </div>
 
   <div class="wrap">
@@ -336,36 +280,20 @@ section .head, .about > div, .services li { transition: opacity .65s ease, trans
         <h2>Selected work</h2>
         <p class="mono" id="count" aria-live="polite">12 posts</p>
       </div>
-      <div class="filters" id="filters" role="group" aria-label="Filter work by category"></div>
       <ul class="grid" id="grid"></ul>
     </section>
 
-    <section id="about">
-      <div class="about">
-        <div>
-          <p class="mono">About</p>
-          <h2 class="head-h" style="font:800 clamp(2.4rem,7vw,4.5rem)/.95 var(--display);font-variation-settings:'wdth' 60;text-transform:uppercase;margin-top:.75rem">Built for the feed</h2>
-          <p class="big" style="margin-top:1.5rem">I design social media posts for brands that sell homes, food and building materials. Each post is made for a phone screen, so the headline reads first and the contact details follow.</p>
-        </div>
-        <ul class="services">
-          <li><b>Social media posts</b><span>Single-image posts in the 4:5 feed format, ready to upload.</span></li>
-          <li><b>Occasion greetings</b><span>Independence Day, Kargil Vijay Diwas, International Youth Day and other dates brands mark.</span></li>
-          <li><b>Property and amenity ads</b><span>Plot launches, apartment amenities and site details with a clear contact block.</span></li>
-          <li><b>Product ads</b><span>Food, plywood and stainless steel shown at a glance with the offer and the phone number.</span></li>
-        </ul>
-      </div>
-    </section>
+
 
 
   </div>
 </main>
 
 <footer>
-  <div class="wrap">
-    <p class="mono">© 2026 Yashmika Dalmia</p>
-    <p class="mono">Graphic designer</p>
+  <div class="wrap" style="justify-content:center">
+    <h2 style="font:800 clamp(3rem,10vw,7rem)/.9 var(--display);text-transform:uppercase">Thank You</h2>
   </div>
-</footer>
+
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Post preview">
   <div class="pic"><img id="lbImg" alt=""></div>
@@ -381,13 +309,6 @@ section .head, .about > div, .services li { transition: opacity .65s ease, trans
 
 <script>
 (function () {
-  var CATS = [
-    { id: "all", label: "All" },
-    { id: "realestate", label: "Real estate" },
-    { id: "food", label: "Food" },
-    { id: "occasion", label: "Occasions" },
-    { id: "materials", label: "Materials" }
-  ];
   var WORK = [
     { f: "singalila-investment", brand: "Singalila Estate", title: "Plot investment launch", cat: "realestate", alt: "Green paddy fields with rupee map pins and the line A Thoughtful Investment for a life time of peace" },
     { f: "singalila-gate", brand: "Singalila Estate", title: "Plot sizes and road widths", cat: "realestate", alt: "Gated estate entrance with 3, 4 and 5 katha plots and 41 ft and 21 ft roads" },
@@ -404,7 +325,7 @@ section .head, .about > div, .services li { transition: opacity .65s ease, trans
   ];
 
   var $ = function (id) { return document.getElementById(id); };
-  var grid = $("grid"), filters = $("filters"), count = $("count");
+  var grid = $("grid"), count = $("count");
   var active = "all", visible = [], current = 0, lastFocus = null;
 
   /* theme */
@@ -418,16 +339,6 @@ section .head, .about > div, .services li { transition: opacity .65s ease, trans
   });
 
   /* work grid */
-  function counts(id) { return id === "all" ? WORK.length : WORK.filter(function (w) { return w.cat === id; }).length; }
-  CATS.forEach(function (c) {
-    var b = document.createElement("button");
-    b.type = "button"; b.className = "chip"; b.dataset.cat = c.id;
-    b.setAttribute("aria-pressed", c.id === "all" ? "true" : "false");
-    b.innerHTML = c.label + " <i>" + counts(c.id) + "</i>";
-    b.addEventListener("click", function () { active = c.id; render(); });
-    filters.appendChild(b);
-  });
-
   WORK.forEach(function (w, i) {
     var li = document.createElement("li");
     li.className = "card"; li.dataset.cat = w.cat;
@@ -441,41 +352,11 @@ section .head, .about > div, .services li { transition: opacity .65s ease, trans
   });
 
   function render() {
-    visible = WORK.filter(function (w) { return active === "all" || w.cat === active; });
-    WORK.forEach(function (w) { w.el.hidden = visible.indexOf(w) < 0; });
-    Array.prototype.forEach.call(filters.children, function (b) { b.setAttribute("aria-pressed", b.dataset.cat === active ? "true" : "false"); });
+    visible = WORK.slice();
+    WORK.forEach(function (w) { w.el.hidden = false; });
     count.textContent = visible.length + (visible.length === 1 ? " post" : " posts");
   }
   render();
-
-
-  /* Scroll-triggered reveal animations (with a graceful fallback) */
-  var revealTargets = Array.prototype.slice.call(document.querySelectorAll(
-    ".brands, #work .head, #filters, .about > div, .services li"
-  ));
-  revealTargets.forEach(function (el) { el.classList.add("reveal-ready"); });
-
-  function observeReveals() {
-    var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
-    var targets = revealTargets.concat(cards);
-    if (!("IntersectionObserver" in window)) {
-      targets.forEach(function (el) { el.classList.add("is-visible"); });
-      return;
-    }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
-    targets.forEach(function (el, i) {
-      if (el.classList.contains("card")) el.style.transitionDelay = (i % 4) * 70 + "ms";
-      observer.observe(el);
-    });
-  }
-  observeReveals();
 
   /* lightbox */
   var lb = $("lb");
